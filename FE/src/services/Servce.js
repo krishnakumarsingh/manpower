@@ -6,16 +6,19 @@ class Service {
     constructor() {
         this.jsonFormat = {
             headers: {
-            'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         };
     }
-    
-    getFireExtinguisherTracker(){
+
+    getFireExtinguisherTracker() {
         return axios.get(USER_API_BASE_URL);
     }
-    setFireExtinguisherTracker(formData){
+    setFireExtinguisherTracker(formData) {
         return axios.post(USER_API_BASE_URL, formData, this.jsonFormat);
+    }
+    deleteFireExtinguisherTracker(formData) {
+        return axios.delete(`${USER_API_BASE_URL}/1`, this.jsonFormat);
     }
 }
 const service = new Service()

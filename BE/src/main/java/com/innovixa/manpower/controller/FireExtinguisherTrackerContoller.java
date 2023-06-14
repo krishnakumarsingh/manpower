@@ -11,33 +11,45 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/fireextinguishertracker")
 @CrossOrigin("http://localhost:3000/")
 public class FireExtinguisherTrackerContoller {
 
     private FireExtinguisherTrackerService fireExtinguisherTrackerService;
 
     // build create User REST API
-    @PostMapping("/fireextinguishertracker")
+    @PostMapping
     public ResponseEntity<FireExtinguisherTracker> createUser(@RequestBody FireExtinguisherTracker fireExtinguisherTracker){
-    	FireExtinguisherTracker savedUser = fireExtinguisherTrackerService.createUser(fireExtinguisherTracker);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    	try {
+    		FireExtinguisherTracker savedUser = fireExtinguisherTrackerService.createUser(fireExtinguisherTracker);
+    		return new ResponseEntity<>(savedUser, HttpStatus.OK);
+    	} catch (Exception e) {
+    		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     }
 
     // build get user by id REST API
     // http://localhost:8080/api/users/1
     @GetMapping("{id}")
     public ResponseEntity<FireExtinguisherTracker> getUserById(@PathVariable("id") Long userId){
-    	FireExtinguisherTracker fireExtinguisherTracker = fireExtinguisherTrackerService.getUserById(userId);
-        return new ResponseEntity<>(fireExtinguisherTracker, HttpStatus.OK);
+    	try {
+    		FireExtinguisherTracker fireExtinguisherTracker = fireExtinguisherTrackerService.getUserById(userId);
+    		return new ResponseEntity<>(fireExtinguisherTracker, HttpStatus.OK);
+    	} catch (Exception e) {
+    		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     }
 
     // Build Get All Users REST API
     // http://localhost:8080/api/users
-    @GetMapping("/fireextinguishertracker")
+    @GetMapping
     public ResponseEntity<List<FireExtinguisherTracker>> getAllUsers(){
-        List<FireExtinguisherTracker> fireExtinguisherTrackers = fireExtinguisherTrackerService.getAllUsers();
-        return new ResponseEntity<>(fireExtinguisherTrackers, HttpStatus.OK);
+    	try {
+    		List<FireExtinguisherTracker> fireExtinguisherTrackers = fireExtinguisherTrackerService.getAllUsers();
+    		return new ResponseEntity<>(fireExtinguisherTrackers, HttpStatus.OK);
+    	} catch (Exception e) {
+    		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     }
 
     // Build Update User REST API
@@ -45,15 +57,23 @@ public class FireExtinguisherTrackerContoller {
     // http://localhost:8080/api/users/1
     public ResponseEntity<FireExtinguisherTracker> updateUser(@PathVariable("id") Long userId,
                                            @RequestBody FireExtinguisherTracker fireExtinguisherTracker){
+    	try {
     	fireExtinguisherTracker.setId(userId);
-    	FireExtinguisherTracker updatedUser = fireExtinguisherTrackerService.updateUser(fireExtinguisherTracker);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    		FireExtinguisherTracker updatedUser = fireExtinguisherTrackerService.updateUser(fireExtinguisherTracker);
+    		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    	} catch (Exception e) {
+    		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     }
 
     // Build Delete User REST API
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId){
-    	fireExtinguisherTrackerService.deleteUser(userId);
-        return new ResponseEntity<>("Data successfully deleted!", HttpStatus.OK);
+    	try {
+    		fireExtinguisherTrackerService.deleteUser(userId);
+    		return new ResponseEntity<>("Data successfully deleted!", HttpStatus.OK);
+    	} catch (Exception e) {
+    		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     }
 }

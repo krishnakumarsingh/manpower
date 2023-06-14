@@ -5,16 +5,16 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function App() {
   return (
-    <>
+    <div className="container-fluid">
       <Navbar bg="light">
-        <Container>
+        <Container fluid>
           <Navbar.Brand><h2><b>INNOVIXA SERVICES PRIVATE LIMITED</b></h2></Navbar.Brand>
         </Container>
       </Navbar>
       <br />
       <br />
       <FireExtinguisherTracker />
-    </>
+    </div>
   );
 }
 
