@@ -33,4 +33,7 @@ public class FireExtinguisherTracker {
 	private String remarks;
 	@Column(nullable = false)
 	private String asOnDated;
+	public Long getId() {
+		return null;
+	}
 }

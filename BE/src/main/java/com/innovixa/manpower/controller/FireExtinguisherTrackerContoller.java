@@ -32,6 +32,7 @@ public class FireExtinguisherTrackerContoller {
     // http://localhost:8080/api/users/1
     @GetMapping("{id}")
     public ResponseEntity<FireExtinguisherTracker> getUserById(@PathVariable("id") Long userId){
+    	System.out.println("==== get greeting ====");
     	try {
     		FireExtinguisherTracker fireExtinguisherTracker = fireExtinguisherTrackerService.getUserById(userId);
     		return new ResponseEntity<>(fireExtinguisherTracker, HttpStatus.OK);
@@ -44,6 +45,7 @@ public class FireExtinguisherTrackerContoller {
     // http://localhost:8080/api/users
     @GetMapping
     public ResponseEntity<List<FireExtinguisherTracker>> getAllUsers(){
+    	System.out.println("==== get greeting ====");
     	try {
     		List<FireExtinguisherTracker> fireExtinguisherTrackers = fireExtinguisherTrackerService.getAllUsers();
     		return new ResponseEntity<>(fireExtinguisherTrackers, HttpStatus.OK);
